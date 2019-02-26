@@ -9,6 +9,7 @@
 3. Chrome browser (https://www.google.com/intl/it_ALL/chrome/)
 4. Firefox browser (https://www.mozilla.org/it/firefox/new/)
 5. Docker CE (https://docs.docker.com/install/)
+6. Wordnet (http://wordnetcode.princeton.edu/3.0/WordNet-3.0.tar.gz). Uncompress it and put the folder in `Desktop`.
 
 TEDD has been tested in MacOS Mojave 10.14.3 and Ubuntu 18.04 LTS.
 

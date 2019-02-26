@@ -43,22 +43,13 @@ function checkMode(){
 	fi
 }
 
-function checkBoolean(){
-    local boolean=$1
-	if [[ $boolean != "true" && $boolean != "false" ]]; then
-		echo Unknown boolean value: $boolean. It is either true or false.
-		exit 1
-	fi
-}
-
 # -----------------------------------------------------------------------------------------------------------------
 
-if test $# -lt 4 ; then echo 'ARGS: application_name main_class mode only_compute_graph_build_time' ; exit 1 ; fi
+if test $# -lt 4 ; then echo 'ARGS: application_name main_class mode' ; exit 1 ; fi
 
 application_name=$1
 main_class=$2
 mode=$3
-only_compute_graph_build_time=$4
 
 os=$(uname)
 
@@ -67,7 +58,6 @@ properties_file=$PWD/src/main/resources/app.properties
 checkApplicationName $application_name
 checkMainClassName $main_class
 checkMode $mode
-checkBoolean $only_compute_graph_build_time
 
 start_container=true
 collect_stats=true

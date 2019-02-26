@@ -1,4 +1,4 @@
-# Test suite MantisBT (version 1.2.0)
+# Test suite Claroline (version 1.11.10)
 
 ### Run the application
 
@@ -12,12 +12,12 @@ Inside the container, start the Apache server with PHP and MySQL:
 
 The application shall run at the address:
 
-`http://localhost:3000/mantisbt/`
+`http://localhost:3000/claroline11110/`
 
 ### Admin Credentials
-username: `administrator`
+username: `admin`
 
-password: `root`
+password: `admin`
 
 ### Stop application and remove container
 Type `^C` in the terminal and then type `exit` to exit from the container. In order to remove the container type `docker rm $(docker ps -aq)`. The command will remove all stopped containers.

@@ -45,7 +45,7 @@ function checkMode(){
 
 # -----------------------------------------------------------------------------------------------------------------
 
-if test $# -lt 4 ; then echo 'ARGS: application_name main_class mode' ; exit 1 ; fi
+if test $# -lt 3 ; then echo 'ARGS: application_name main_class mode' ; exit 1 ; fi
 
 application_name=$1
 main_class=$2

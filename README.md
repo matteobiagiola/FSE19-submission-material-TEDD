@@ -35,13 +35,13 @@ The main script to run experiments is `FSE19-submission-material/tedd/run-experi
 
 The possible combinations of those arguments are listed below (leaving out the `application_name`):
 1. `cd FSE19-submission-material/tedd ./run-experiment.sh <application_name> baseline_complete baseline_complete` to run the baseline (original order graph extraction)
-2. `cd FSE19-submission-material/tedd ./run-experiment.sh $application_name tedd string_analysis`
-3. `cd FSE19-submission-material/tedd ./run-experiment.sh $application_name tedd nlp_verb_only_baseline`
-4. `cd FSE19-submission-material/tedd ./run-experiment.sh $application_name tedd nlp_verb_only_string`
-5. `cd FSE19-submission-material/tedd ./run-experiment.sh $application_name tedd nlp_dobj_baseline`
-6. `cd FSE19-submission-material/tedd ./run-experiment.sh $application_name tedd nlp_dobj_string`
-7. `cd FSE19-submission-material/tedd ./run-experiment.sh $application_name tedd nlp_noun_matching_baseline`
-8. `cd FSE19-submission-material/tedd ./run-experiment.sh $application_name tedd nlp_noun_matching_string`
+2. `cd FSE19-submission-material/tedd ./run-experiment.sh <application_name> tedd string_analysis`
+3. `cd FSE19-submission-material/tedd ./run-experiment.sh <application_name> tedd nlp_verb_only_baseline`
+4. `cd FSE19-submission-material/tedd ./run-experiment.sh <application_name> tedd nlp_verb_only_string`
+5. `cd FSE19-submission-material/tedd ./run-experiment.sh <application_name> tedd nlp_dobj_baseline`
+6. `cd FSE19-submission-material/tedd ./run-experiment.sh <application_name> tedd nlp_dobj_string`
+7. `cd FSE19-submission-material/tedd ./run-experiment.sh <application_name> tedd nlp_noun_matching_baseline`
+8. `cd FSE19-submission-material/tedd ./run-experiment.sh <application_name> tedd nlp_noun_matching_string`
 
 Alternatively, the `FSE19-submission-material/tedd/run-experiments.sh` runs all the available configurations. The only required parameter is the application name. To run it type `cd FSE19-submission-material/tedd && ./run-experiments <application_name>`.
 

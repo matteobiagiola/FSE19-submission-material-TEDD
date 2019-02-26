@@ -27,9 +27,7 @@ function checkApplicationName(){
 
 function checkMode(){
 	local mode=$1
-	if [[ $mode != "final_graphs_check" && $mode != "final_graph_validation" \
-	    && $mode != "false_positives_detection" \
-	    && $mode != "parallelization" ]]; then
+	if [[ $mode != "parallelization" ]]; then
 		echo Unknown mode: $mode
 		exit 1
 	fi
@@ -43,17 +41,16 @@ function runExp(){
     local main_class=$2
     local start_container=$3
     local collect_stats=$4
-    ./run.sh $main_class $application_name $start_container $collect_stats > $logs_name 2> $errors_logs_name
+    ./run-java.sh $main_class $application_name $start_container $collect_stats > $logs_name 2> $errors_logs_name
 }
 
 # -----------------------------------------------------------------------------------------------------------------
 
-if test $# -lt 4 ; then echo 'ARGS: results_folder application_name ground_truth_folder mode' ; exit 1 ; fi
+if test $# -lt 3 ; then echo 'ARGS: results_folder application_name mode' ; exit 1 ; fi
 
 results_folder=$1
 application_name=$2
-ground_truth_folder=$3
-mode=$4
+mode=$3
 
 os=$(uname)
 
@@ -61,29 +58,12 @@ properties_file=$PWD/src/main/resources/app.properties
 
 checkFolderExistence $results_folder
 checkApplicationName $application_name
-checkFolderExistence $ground_truth_folder
 checkMode $mode
 
 final_graph_prefix=dependency-graph-final-
 final_graph_recover_missed_suffix=-recover-missed-
-ground_truth_graph_prefix=computed-graph-final-
 
 folder="$results_folder/$application_name"
-
-ground_truth_graph=none
-for ground_truth_graph_candidate in $(ls $ground_truth_folder) ; do
-    if [[ $ground_truth_graph_candidate == $ground_truth_graph_prefix$application_name.txt ]]; then
-        ground_truth_graph=$ground_truth_folder/$ground_truth_graph_candidate
-    fi
-done
-
-if [[ $ground_truth_graph == none ]]; then
-    echo Ground truth graph with named $ground_truth_graph_prefix$application_name.txt not found \
-        in $ground_truth_folder
-    exit 1
-fi
-
-echo Ground truth graph: $ground_truth_graph
 
 for exp in $(ls $folder) ; do
     echo "Checking $exp for application $application_name in mode $mode"
@@ -119,39 +99,7 @@ for exp in $(ls $folder) ; do
     main_class=
     collect_stats=false
 
-    if [[ $mode == "final_graphs_check" ]]; then
-
-        if [[ $os == "Darwin" ]]; then
-            sed -i "" "s%first_graph_path=.*$%first_graph_path=$ground_truth_graph%g" $properties_file
-            sed -i "" "s%second_graph_path=.*$%second_graph_path=$final_graph_chosen%g" $properties_file
-            sed -i "" "s%dependency_check=.*$%dependency_check=true%g" $properties_file
-            sed -i "" "s%first_graph_ground_truth=.*$%first_graph_ground_truth=true%g" $properties_file
-        else
-            sed -i "s%first_graph_path=.*$%first_graph_path=$ground_truth_graph%g" $properties_file
-            sed -i "s%second_graph_path=.*$%second_graph_path=$final_graph_chosen%g" $properties_file
-            sed -i "s%dependency_check=.*$%dependency_check=true%g" $properties_file
-            sed -i "s%first_graph_ground_truth=.*$%first_graph_ground_truth=true%g" $properties_file
-        fi
-        start_container=false
-        main_class=dependency_graph_check
-
-    elif [[ $mode == "final_graph_validation" ]]; then
-
-        if [[ $os == "Darwin" ]]; then
-            sed -i "" "s%final_graph_path=.*$%final_graph_path=$final_graph_chosen%g" $properties_file
-            sed -i "" "s%check_final_graph=.*$%check_final_graph=true%g" $properties_file
-            sed -i "" "s%execute_whole_test_suite=.*$%execute_whole_test_suite=false%g" $properties_file
-        else
-            sed -i "s%final_graph_path=.*$%final_graph_path=$final_graph_chosen%g" $properties_file
-            sed -i "s%check_final_graph=.*$%check_final_graph=true%g" $properties_file
-            sed -i "s%execute_whole_test_suite=.*$%execute_whole_test_suite=false%g" $properties_file
-        fi
-
-        start_container=true
-        main_class=check_final_graph_correctness
-        collect_stats=true
-
-    elif [[ $mode == "parallelization" ]]; then
+    if [[ $mode == "parallelization" ]]; then
 
         if [[ $os == "Darwin" ]]; then
             sed -i "" "s%final_graph_path=.*$%final_graph_path=$final_graph_chosen%g" $properties_file
@@ -166,25 +114,9 @@ for exp in $(ls $folder) ; do
         start_container=true
         main_class=check_final_graph_correctness
         collect_stats=true
-
-    elif [[ $mode == "false_positives_detection" ]]; then
-
-        if [[ $os == "Darwin" ]]; then
-            sed -i "" "s%^graph_path=.*$%graph_path=$final_graph_chosen%g" $properties_file
-            sed -i "" "s%ground_truth_check=.*$%ground_truth_check=true%g" $properties_file
-            sed -i "" "s%refine=.*$%refine=true%g" $properties_file
-            sed -i "" "s%recover_missed_dependencies=.*$%recover_missed_dependencies=false%g" $properties_file
-        else
-            sed -i "s%^graph_path=.*$%graph_path=$final_graph_chosen%g" $properties_file
-            sed -i "s%ground_truth_check=.*$%ground_truth_check=true%g" $properties_file
-            sed -i "s%refine=.*$%refine=true%g" $properties_file
-            sed -i "s%recover_missed_dependencies=.*$%recover_missed_dependencies=false%g" $properties_file
-        fi
-
-        start_container=true
-        main_class=refine
-        collect_stats=true
-
+    else
+        echo Unknown mode: $mode
+        exit 1
     fi
 
     logs_name=$HOME/Desktop/logs"_"$exp"_"$main_class"_"$application_name.txt

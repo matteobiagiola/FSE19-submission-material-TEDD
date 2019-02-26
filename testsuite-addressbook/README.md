@@ -1,4 +1,4 @@
-# Test suite Collabtive (version 3.1)
+# Test suite Addressbook (version 8.0.0.0)
 
 ### Run the application
 
@@ -12,12 +12,12 @@ Inside the container, start the Apache server with PHP and MySQL:
 
 The application shall run at the address:
 
-`http://localhost:3000/collabtive/`
+`http://localhost:3000/addressbook/`
 
 ### Admin Credentials
 username: `admin`
 
-password: `admin`
+password: `secret`
 
 ### Stop application and remove container
 Type `^C` in the terminal and then type `exit` to exit from the container. In order to remove the container type `docker rm $(docker ps -aq)`. The command will remove all stopped containers.

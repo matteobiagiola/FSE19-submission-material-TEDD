@@ -22,7 +22,7 @@ function checkProjectName(){
 function runContainer(){
     local application_name_local=$1
     local current_date=$2
-    local testsuite_path=~/workspace/testsuite-$application_name_local
+    local testsuite_path=~/workspace/FSE19-submission-material/testsuite-$application_name_local
     if [[ -e $testsuite_path ]]; then
         if [[ -d $testsuite_path ]]; then
             if [[ -f $testsuite_path/run-docker.sh ]]; then

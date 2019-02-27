@@ -148,7 +148,7 @@ else
     sed -i "s%only_compute_graph_build_time=.*$%only_compute_graph_build_time=$only_compute_graph_build_time%g" \
         $properties_file
     sed -i "s%recover_missed_dependencies=.*$%recover_missed_dependencies=true%g" $properties_file
-    if [[ $main_class == "tedd" && $mode == "baseline_complete" ]]; then
+    if [[ $main_class == "baseline_complete" && $mode == "baseline_complete" ]]; then
         sed -i "s%recover_missed_dependencies=.*$%recover_missed_dependencies=false%g" $properties_file
         sed -i "s%baseline=.*$%baseline=true%g" $properties_file
     elif [[ $main_class == "tedd" && $mode == "string_analysis" ]]; then

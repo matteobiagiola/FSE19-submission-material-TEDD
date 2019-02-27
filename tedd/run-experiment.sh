@@ -62,19 +62,12 @@ checkMode $mode
 start_container=true
 collect_stats=true
 
-if [[ $only_compute_graph_build_time == "true" ]]; then
-    collect_stats=false
-    start_container=false
-fi
-
 if [[ $os == "Darwin" ]]; then
     sed -i "" "s%dependency_graph_path=.*$%dependency_graph_path=$HOME/workspace/FSE19-submission-material/tedd/src/main/resources%g" \
         $properties_file
     sed -i "" "s%test_suite_path=.*$%test_suite_path=$HOME/workspace/FSE19-submission-material/testsuite-$application_name/src/main/java/main/TestSuite.java%g" \
         $properties_file
     sed -i "" "s%tests_path=.*$%tests_path=$HOME/workspace/FSE19-submission-material/testsuite-$application_name/src/main/java/tests%g" \
-        $properties_file
-    sed -i "" "s%only_compute_graph_build_time=.*$%only_compute_graph_build_time=$only_compute_graph_build_time%g" \
         $properties_file
     sed -i "" "s%recover_missed_dependencies=.*$%recover_missed_dependencies=true%g" $properties_file
     if [[ $main_class == "baseline_complete" && $mode == "baseline_complete" ]]; then
@@ -144,8 +137,6 @@ else
     sed -i "s%test_suite_path=.*$%test_suite_path=$HOME/workspace/FSE19-submission-material/testsuite-$application_name/src/main/java/main/TestSuite.java%g" \
         $properties_file
     sed -i "s%tests_path=.*$%tests_path=$HOME/workspace/FSE19-submission-material/testsuite-$application_name/src/main/java/tests%g" \
-        $properties_file
-    sed -i "s%only_compute_graph_build_time=.*$%only_compute_graph_build_time=$only_compute_graph_build_time%g" \
         $properties_file
     sed -i "s%recover_missed_dependencies=.*$%recover_missed_dependencies=true%g" $properties_file
     if [[ $main_class == "baseline_complete" && $mode == "baseline_complete" ]]; then

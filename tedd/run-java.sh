@@ -83,11 +83,11 @@ if [[ $start_container == "true" ]]; then
 fi
 
 if [[ $main_class_name == "baseline_complete" ]]; then
-    java -Xms4096m -Xmx4096m -cp $classpath org.mb.tedd.main.BaselineCompleteGraph
+    java -Xms3072m -Xmx3072m -cp $classpath org.mb.tedd.main.BaselineCompleteGraph
 elif [[ $main_class_name == "check_final_graph_correctness" ]]; then
-    java -Xms4096m -Xmx4096m -cp $classpath org.mb.tedd.main.CheckFinalGraphCorrectness
+    java -Xms3072m -Xmx3072m -cp $classpath org.mb.tedd.main.CheckFinalGraphCorrectness
 elif [[ $main_class_name == "tedd" ]]; then
-    java -Xms4096m -Xmx4096m -cp $classpath org.mb.tedd.main.Tedd
+    java -Xms3072m -Xmx3072m -cp $classpath org.mb.tedd.main.Tedd
 fi
 
 if [[ $collect_stats == "true" ]]; then

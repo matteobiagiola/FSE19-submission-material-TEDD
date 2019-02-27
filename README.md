@@ -15,7 +15,7 @@ TEDD has been tested in MacOS Mojave 10.14.3 and Ubuntu 18.04 LTS.
 
 ### Download docker images
 Before running the experiments: 
-- clone the repository (`git clone https://github.com/anonymous-fse19-submitter/FSE19-submission-material.git`). Move the folder in `<path-to-your-home>/workspace` (create the folder `workspace` if it does not exist)
+- clone the repository (`git clone https://github.com/anonymous-fse19-submitter/FSE19-submission-material.git`) in `<path-to-your-home>/workspace` (create the folder `workspace` if it does not exist)
 - `cd FSE19-submission-material/tedd && mvn clean compile`
 - `cd FSE19-submission-material/testsuite-<application_name> && mvn clean compile` where `<application_name>` is `claroline|addressbook|ppma|collabtive|mrbs|mantisbt`
 - download docker web application images. The instructions to run each web application are in the relative folders (`FSE19-submission-material/testsuite-<application_name>`):

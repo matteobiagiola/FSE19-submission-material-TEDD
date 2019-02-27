@@ -13,7 +13,6 @@ spooned/
 *.iml
 *.log
 *.log.*
-*.txt
 src/main/resources/*.java
 annotation-cache
 tedd/src/main/resources/app.properties

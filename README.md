@@ -9,13 +9,13 @@
 3. Chrome browser (https://www.google.com/intl/it_ALL/chrome/)
 4. Firefox browser (https://www.mozilla.org/it/firefox/new/)
 5. Docker CE (https://docs.docker.com/install/)
-6. Wordnet (http://wordnetcode.princeton.edu/3.0/WordNet-3.0.tar.gz). Uncompress it and put the extracted folder (`WordNet-3.0`) in `Desktop`.
+6. Wordnet (http://wordnetcode.princeton.edu/3.0/WordNet-3.0.tar.gz). Uncompress the folder and move it (`WordNet-3.0`) in `Desktop`.
 
 TEDD has been tested in MacOS Mojave 10.14.3 and Ubuntu 18.04 LTS.
 
 ### Download docker images
 Before running the experiments: 
-- clone the repository (`git clone https://github.com/anonymous-fse19-submitter/FSE19-submission-material.git`)
+- clone the repository (`git clone https://github.com/anonymous-fse19-submitter/FSE19-submission-material.git`). Move the folder in `<path-to-your-home>/workspace` (create the folder `workspace` if it does not exist)
 - `cd FSE19-submission-material/tedd && mvn clean compile`
 - `cd FSE19-submission-material/testsuite-<application_name> && mvn clean compile` where `<application_name>` is `claroline|addressbook|ppma|collabtive|mrbs|mantisbt`
 - download docker web application images. The instructions to run each web application are in the relative folders (`FSE19-submission-material/testsuite-<application_name>`):
@@ -25,6 +25,10 @@ Before running the experiments:
   - `docker pull dockercontainervm/collabtive:3.1`,
   - `docker pull dockercontainervm/mrbs:1.4.9`,
   - `docker pull dockercontainervm/mantisbt:1.2.0`
+  
+### Setup app.properties
+
+Rename the `app.example.properties` in `app.properties` in folder `FSE19-submission-material/tedd/src/main/resources`. Replace all occurences of `/home/anonymous` with `<path-to-your-home>` directory.
   
 ## Automatic Setup
 

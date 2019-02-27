@@ -4,7 +4,7 @@
 
 A virtual machine running Ubuntu server 16.04 is available for download at https://drive.google.com/file/d/1O94guDkO5EQLtK-jVMH6r_mJpdbc3OEt/view?usp=sharing. The virtual machine contains this repository and all the dependencies needed to run TEDD on the test suite subjects. 
 
-The virtual machine was created with VMWare Fusion and was exported in the `.ova` format, a platform-independent distribution format for virtual machines. It can be imported by any virtualization software although it was tested only on VirtualBox and VMWare fusion. Instructions on how to import an `.ova` format virtual machine in VirtualBox and VMWare fusion are listed below:
+The virtual machine was created with VMWare Fusion and was exported in the `.ova` format, a platform-independent distribution format for virtual machines. It can be imported by any virtualization software although it was tested only on VirtualBox and VMWare Fusion. Instructions on how to import an `.ova` format virtual machine in VirtualBox and VMWare Fusion are listed below:
 
 - VirtualBox: https://www.techjunkie.com/ova-virtualbox/
 - VMWare Fusion: https://pubs.vmware.com/fusion-5/index.jsp?topic=%2Fcom.vmware.fusion.help.doc%2FGUID-275EF202-CF74-43BF-A9E9-351488E16030.html
@@ -30,7 +30,7 @@ In case there is any problem with the virtual machine, below there are instructi
 
 TEDD has been tested in MacOS Mojave 10.14.3 and Ubuntu (18.04 LTS and 16.04 LTS).
 
-### Download docker images
+### Clone repo and donwload docker images
 Before running the experiments: 
 - clone the repository (`git clone https://github.com/anonymous-fse19-submitter/FSE19-submission-material.git`) in `<path-to-your-home>/workspace` (create the folder `workspace` if it does not exist)
 - `cd FSE19-submission-material/tedd && mvn clean compile`
@@ -62,7 +62,7 @@ The possible combinations of those arguments are listed below (leaving unspecifi
 7. `cd FSE19-submission-material/tedd ./run-experiment.sh <application_name> tedd nlp_noun_matching_baseline`
 8. `cd FSE19-submission-material/tedd ./run-experiment.sh <application_name> tedd nlp_noun_matching_string`
 
-Alternatively, the `FSE19-submission-material/tedd/run-experiments.sh` runs all the available configurations. The only required parameter is the application name. To run it type `cd FSE19-submission-material/tedd && ./run-experiments <application_name>`.
+Alternatively, the `FSE19-submission-material/tedd/run-experiments.sh` runs all the available configurations (including the baseline). The only required parameter is the application name. To run it type `cd FSE19-submission-material/tedd && ./run-experiments <application_name>`.
 
 The `FSE19-submission-material/tedd/run-experiment.sh` starts the docker container for the given application and removes it when the validation ends. While the script is running the logs are saved in the `Desktop` as `logs_main_class_application_name.txt`; you can inspect the logs to see the details of the validation. 
 

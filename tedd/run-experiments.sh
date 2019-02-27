@@ -11,10 +11,9 @@ function checkApplicationName(){
 
 # -----------------------------------------------------------------------------------------------------------------
 
-if test $# -lt 2 ; then echo 'ARGS: application_name' ; exit 1 ; fi
+if test $# -lt 1 ; then echo 'ARGS: application_name' ; exit 1 ; fi
 
 application_name=$1
-only_compute_graph_build_time=$2
 checkApplicationName $application_name
 
 echo BASELINE_COMPLETE

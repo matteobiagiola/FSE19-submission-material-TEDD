@@ -61,7 +61,8 @@ The second argument is the `main_class` that is going to be executed. The availa
 - `baseline_complete|tedd`. 
 
 The third argument is the `mode`, or the desired configuration of the tool. The available values are:
-- `baseline_complete|string_analysis|nlp_verb_only_baseline|nlp_verb_only_string|nlp_dobj_baseline|nlp_dobj_string|nlp_noun_matching_baseline|nlp_noun_matching_string`.
+- `baseline_complete|string_analysis|nlp_verb_only_baseline|nlp_verb_only_string|`
+`nlp_dobj_baseline|nlp_dobj_string|nlp_noun_matching_baseline|nlp_noun_matching_string`.
 
 The possible combinations of those arguments are listed below (as example `application_name=ppma`). The following commands assume you are in the `~/workspace/FSE19-submission-material/tedd` folder:
 1. `./run-experiment.sh ppma baseline_complete baseline_complete` to run the baseline (original order graph extraction)

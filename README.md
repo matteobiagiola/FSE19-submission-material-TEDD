@@ -15,7 +15,7 @@ Login credentials:
 - username: `anonymous`
 - password: `fse19`
 
-If the automatic setup worked, you can skip to [the validation experiments section](#2-run-the-experiments-validation---after-the-setup). Otherwise procede to the [manual setup section](#1.1-manual-setup).
+If the automatic setup worked, you can skip to [the validation experiments section](#2-run-the-experiments-validation---after-the-setup). Otherwise procede to the [manual setup section](#11-manual-setup).
 
 #### 1.1 Manual Setup
 

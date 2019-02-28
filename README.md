@@ -52,38 +52,38 @@ Rename the `app.example.properties` in `app.properties` in folder `FSE19-submiss
 
 ## 2. Run the experiments (validation - after the setup)
 
-The main script to run the validation experiments is `FSE19-submission-material/tedd/run-experiment.sh`. 
+The main script to run the validation experiments is [run-experiment.sh](https://github.com/anonymous-fse19-submitter/FSE19-submission-material/blob/master/tedd/run-experiment.sh). 
 
 The first argument is the `application_name`. The available values are:
--`claroline|addressbook|ppma|collabtive|mrbs|mantisbt`
+- `claroline|addressbook|ppma|collabtive|mrbs|mantisbt`
 
 The second argument is the `main_class` that is going to be executed. The available values are:
--`baseline_complete|tedd`. 
+- `baseline_complete|tedd`. 
 
 The third argument is the `mode`, or the desired configuration of the tool. The available values are:
--`baseline_complete|string_analysis|nlp_verb_only_baseline|nlp_verb_only_string|nlp_dobj_baseline|nlp_dobj_string|nlp_noun_matching_baseline|nlp_noun_matching_string`.
+- `baseline_complete|string_analysis|nlp_verb_only_baseline|nlp_verb_only_string|nlp_dobj_baseline|nlp_dobj_string|nlp_noun_matching_baseline|nlp_noun_matching_string`.
 
-The possible combinations of those arguments are listed below (as example `application_name=ppma`):
-1. `cd ~/workspace/FSE19-submission-material/tedd && ./run-experiment.sh claroline baseline_complete baseline_complete` to run the baseline (original order graph extraction)
-2. `cd ~/workspace/FSE19-submission-material/tedd && ./run-experiment.sh ppma tedd string_analysis`
-3. `cd ~/workspace/FSE19-submission-material/tedd && ./run-experiment.sh ppma tedd nlp_verb_only_baseline`
-4. `cd ~/workspace/FSE19-submission-material/tedd && ./run-experiment.sh ppma tedd nlp_verb_only_string`
-5. `cd ~/workspace/FSE19-submission-material/tedd && ./run-experiment.sh ppma tedd nlp_dobj_baseline`
-6. `cd ~/workspace/FSE19-submission-material/tedd && ./run-experiment.sh ppma tedd nlp_dobj_string`
-7. `cd ~/workspace/FSE19-submission-material/tedd && ./run-experiment.sh ppma tedd nlp_noun_matching_baseline`
-8. `cd ~/workspace/FSE19-submission-material/tedd && ./run-experiment.sh ppma tedd nlp_noun_matching_string`
+The possible combinations of those arguments are listed below (as example `application_name=ppma`). The following commands assume you are in the `~/workspace/FSE19-submission-material/tedd` folder:
+1. `./run-experiment.sh ppma baseline_complete baseline_complete` to run the baseline (original order graph extraction)
+2. `./run-experiment.sh ppma tedd string_analysis`
+3. `./run-experiment.sh ppma tedd nlp_verb_only_baseline`
+4. `./run-experiment.sh ppma tedd nlp_verb_only_string`
+5. `./run-experiment.sh ppma tedd nlp_dobj_baseline`
+6. `./run-experiment.sh ppma tedd nlp_dobj_string`
+7. `./run-experiment.sh ppma tedd nlp_noun_matching_baseline`
+8. `./run-experiment.sh ppma tedd nlp_noun_matching_string`
 
-The `FSE19-submission-material/tedd/run-experiment.sh` starts the docker container for the given application and removes it when the validation ends. When the validation ends, the script saves a directory on the `Desktop` folder with the application name containing the results of the validation. The results folder contains the logs, the final dependency graph and a folder containing the intermediate graphs obtained during the validation.
+The [run-experiment script](https://github.com/anonymous-fse19-submitter/FSE19-submission-material/blob/master/tedd/run-experiment.sh) starts the docker container for the given application and removes it when the validation ends. When the validation ends, the script saves a directory on the `Desktop` folder with the application name containing the results of the validation. The results folder contains the logs, the final dependency graph and a folder containing the intermediate graphs obtained during the validation.
 
 It is possible to stop the computation by typing `^C` once on the terminal. Typing `^C` once will end the validation and the script takes care of saving the results computed so far and it removes the docker container for the given application (no final dependency graph is saved). If you press `^C` twice the results are not saved and the docker container is not removed. In order to remove it, first you need to stop it `docker stop $(docker ps -aq)` and then remove it `docker rm $(docker ps -aq)` (specifically, the previous commands will not stop and remove only one container but all containers running on the system).
 
 
 ## 3. Run the experiments (parallelization - after the setup)
 
-The repository has a directory called `FSE19-submission-material/ready-to-run-parallelization` that contains the final dependencies graphs for all the possible configurations of TEDD and for the baseline approach.
+The repository has a directory called [ready-to-run-parallelization](https://github.com/anonymous-fse19-submitter/FSE19-submission-material/tree/master/ready-to-run-parallelization) that contains the final dependencies graphs for all the possible configurations of TEDD and for the baseline approach.
 
-The script `FSE19-submission-material/tedd/run-parallelization` extracts and execute all the possible test suites from each dependency graph in the `FSE19-submission-material/ready-to-run-parallelization` folder for each application.
+The script [run-parallelization.sh](https://github.com/anonymous-fse19-submitter/FSE19-submission-material/blob/master/tedd/run-parallelization.sh) extracts and execute all the possible test suites from each dependency graph in the [ready-to-run-parallelization](https://github.com/anonymous-fse19-submitter/FSE19-submission-material/tree/master/ready-to-run-parallelization) folder for each application.
 
-To run it type `cd ~/workspace/FSE19-submission-material/tedd && ./run-parallelization.sh ppma` (choosing `application_name=ppma`). The script starts the docker container for the given application and stops it when the computation finishes. The unique test suites for each dependency graph are executed sequentially and the speed-up factors are computed (worst case and average case) by executing the test suite in its original order after the sequential executions.
+To run it move to the `~/workspace/FSE19-submission-material/tedd` folder and type `./run-parallelization.sh ppma` (choosing `application_name=ppma`). The script starts the docker container for the given application and stops it when the computation finishes. The unique test suites for each dependency graph are executed sequentially and the speed-up factors are computed (worst case and average case) by executing the test suite in its original order after the sequential executions.
 
 As in the previous script the results are saved in the `Desktop` folder. The script creates a folder with the application name that contains the results directory with the logs. The logs can be inspected to see the details of the computation.

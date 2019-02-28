@@ -32,22 +32,23 @@ In case there is any problem with the [automatic setup](#1-automatic-setup), bel
 
 TEDD has been tested in MacOS Mojave 10.14.3 and Ubuntu (18.04 LTS and 16.04 LTS).
 
-##### 1.1.2 Clone repo and donwload docker images
-Before running the experiments: 
-- clone the repository (`git clone https://github.com/anonymous-fse19-submitter/FSE19-submission-material.git`) in `<path-to-your-home>/workspace` (create the folder `workspace` if it does not exist)
-- `cd FSE19-submission-material/tedd && mvn clean compile`
-- `cd FSE19-submission-material/testsuite-<application_name> && mvn clean compile` where `<application_name>` is `claroline|addressbook|ppma|collabtive|mrbs|mantisbt`
+##### 1.1.2 Clone repo and download docker images
+Before running the experiments (assuming that your home directory is `/home/user`): 
+- clone the repository (`git clone https://github.com/anonymous-fse19-submitter/FSE19-submission-material.git`) in `/home/user/workspace` (create the folder `workspace` if it does not exist)
+- `cd /home/user/workpsace/FSE19-submission-material/tedd && mvn clean compile`
+- `cd /home/user/workpsace/FSE19-submission-material/testsuite-<application_name> && mvn clean compile` where `<application_name>` is: 
+  - `claroline|addressbook|ppma|collabtive|mrbs|mantisbt`
 - download docker web application images. The instructions to run each web application are in the relative folders (`FSE19-submission-material/testsuite-<application_name>`):
-  - `docker pull dockercontainervm/claroline:1.11.10`
-  - `docker pull dockercontainervm/addressbook:8.0.0.0`
-  - `docker pull dockercontainervm/ppma:0.6.0`
-  - `docker pull dockercontainervm/collabtive:3.1`
-  - `docker pull dockercontainervm/mrbs:1.4.9`
-  - `docker pull dockercontainervm/mantisbt:1.2.0`
+  - `docker pull dockercontainervm/claroline:1.11.10` ([README](https://github.com/anonymous-fse19-submitter/FSE19-submission-material/blob/master/testsuite-claroline/README.md))
+  - `docker pull dockercontainervm/addressbook:8.0.0.0` ([README](https://github.com/anonymous-fse19-submitter/FSE19-submission-material/blob/master/testsuite-addressbook/README.md))
+  - `docker pull dockercontainervm/ppma:0.6.0` ([README](https://github.com/anonymous-fse19-submitter/FSE19-submission-material/blob/master/testsuite-ppma/README.md))
+  - `docker pull dockercontainervm/collabtive:3.1` ([README](https://github.com/anonymous-fse19-submitter/FSE19-submission-material/blob/master/testsuite-collabtive/README.md))
+  - `docker pull dockercontainervm/mrbs:1.4.9` ([README](https://github.com/anonymous-fse19-submitter/FSE19-submission-material/blob/master/testsuite-mrbs/README.md))
+  - `docker pull dockercontainervm/mantisbt:1.2.0` ([README](https://github.com/anonymous-fse19-submitter/FSE19-submission-material/blob/master/testsuite-mantisbt/README.md))
 
 ##### 1.1.3 Setup app.properties
 
-Rename the `app.example.properties` in `app.properties` in folder `FSE19-submission-material/tedd/src/main/resources`. Replace all occurences of `/home/anonymous` with `<path-to-your-home>` directory.
+Rename the `app.example.properties` in `app.properties` in folder `/home/user/FSE19-submission-material/tedd/src/main/resources`. Replace all occurences of `/home/anonymous` with `/home/user` directory.
   
 
 ## 2. Run the experiments (validation - after the setup)
@@ -64,7 +65,7 @@ The third argument is the `mode`, or the desired configuration of the tool. The 
 - `baseline_complete|string_analysis|nlp_verb_only_baseline|nlp_verb_only_string|`
 `nlp_dobj_baseline|nlp_dobj_string|nlp_noun_matching_baseline|nlp_noun_matching_string`
 
-The possible combinations of those arguments are listed below (as example `application_name=ppma`). The following commands assume you are in the `~/workspace/FSE19-submission-material/tedd` folder:
+The possible combinations of those arguments are listed below (as example `application_name=ppma`). The following commands assume you are in the `/home/user/workspace/FSE19-submission-material/tedd` folder, assuming that `/home/user` is your home directory:
 1. `./run-experiment.sh ppma baseline_complete baseline_complete` (it takes ~1.3 h to run)
 2. `./run-experiment.sh ppma tedd string_analysis` (it takes ~52 min to run)
 3. `./run-experiment.sh ppma tedd nlp_verb_only_baseline` (it takes ~18 min to run)
@@ -85,6 +86,6 @@ The repository has a directory called [ready-to-run-parallelization](https://git
 
 The script [run-parallelization.sh](https://github.com/anonymous-fse19-submitter/FSE19-submission-material/blob/master/tedd/run-parallelization.sh) extracts and execute all the possible test suites from each dependency graph in the [ready-to-run-parallelization](https://github.com/anonymous-fse19-submitter/FSE19-submission-material/tree/master/ready-to-run-parallelization) folder for each application.
 
-To run it move to the `~/workspace/FSE19-submission-material/tedd` folder and type `./run-parallelization.sh ppma` (choosing `application_name=ppma`). The script starts the docker container for the given application and stops it when the computation finishes. The unique test suites for each dependency graph are executed sequentially and the speed-up factors are computed (worst case and average case) by executing the test suite in its original order after the sequential executions.
+To run it move to the `/home/user/workspace/FSE19-submission-material/tedd` folder and type `./run-parallelization.sh ppma` (choosing `application_name=ppma`). The script starts the docker container for the given application and stops it when the computation finishes. The unique test suites for each dependency graph are executed sequentially and the speed-up factors are computed (worst case and average case) by executing the test suite in its original order after the sequential executions.
 
 As in the previous script the results are saved in the `Desktop` folder. The script creates a folder with the application name that contains the results directory with the logs. The logs can be inspected to see the details of the computation.

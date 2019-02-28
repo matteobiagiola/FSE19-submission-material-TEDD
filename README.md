@@ -65,14 +65,14 @@ The third argument is the `mode`, or the desired configuration of the tool. The 
 `nlp_dobj_baseline|nlp_dobj_string|nlp_noun_matching_baseline|nlp_noun_matching_string`.
 
 The possible combinations of those arguments are listed below (as example `application_name=ppma`). The following commands assume you are in the `~/workspace/FSE19-submission-material/tedd` folder:
-1. `./run-experiment.sh ppma baseline_complete baseline_complete` to run the baseline (original order graph extraction)
-2. `./run-experiment.sh ppma tedd string_analysis`
-3. `./run-experiment.sh ppma tedd nlp_verb_only_baseline`
-4. `./run-experiment.sh ppma tedd nlp_verb_only_string`
-5. `./run-experiment.sh ppma tedd nlp_dobj_baseline`
-6. `./run-experiment.sh ppma tedd nlp_dobj_string`
-7. `./run-experiment.sh ppma tedd nlp_noun_matching_baseline`
-8. `./run-experiment.sh ppma tedd nlp_noun_matching_string`
+1. `./run-experiment.sh ppma baseline_complete baseline_complete` to run the baseline (it takes ~1.3 h to run)
+2. `./run-experiment.sh ppma tedd string_analysis` (it takes ~52 min to run)
+3. `./run-experiment.sh ppma tedd nlp_verb_only_baseline` (it takes ~18 min to run)
+4. `./run-experiment.sh ppma tedd nlp_verb_only_string` (it takes ~18 min to run)
+5. `./run-experiment.sh ppma tedd nlp_dobj_baseline` (it takes ~33 min to run)
+6. `./run-experiment.sh ppma tedd nlp_dobj_string` (it takes ~33 min to run)
+7. `./run-experiment.sh ppma tedd nlp_noun_matching_baseline` (it takes ~32 min to run)
+8. `./run-experiment.sh ppma tedd nlp_noun_matching_string` (it takes ~32 min to run)
 
 The [run-experiment script](https://github.com/anonymous-fse19-submitter/FSE19-submission-material/blob/master/tedd/run-experiment.sh) starts the docker container for the given application and removes it when the validation ends. When the validation ends, the script saves a directory on the `Desktop` folder with the application name containing the results of the validation. The results folder contains the logs, the final dependency graph and a folder containing the intermediate graphs obtained during the validation.
 

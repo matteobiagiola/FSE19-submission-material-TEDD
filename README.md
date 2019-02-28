@@ -15,39 +15,39 @@ Login credentials:
 - username: `anonymous`
 - password: `fse19`
 
-If the automatic setup worked you can skip to [the validation experiments section](#2-run-the-experiments-validation---after-the-setup).
+If the automatic setup worked, you can skip to [the validation experiments section](#2-run-the-experiments-validation---after-the-setup).
 
-  ## 1.1 Manual Setup
-  
-  In case there is any problem with the [automatic setup](#1-automatic-setup), below there are instructions on how to manually configure the environment to run TEDD on the test suite subjects.
+#### 1.1 Manual Setup
 
-  ### 1.1.1 TEDD and the test suite subjects have the following dependencies:
+In case there is any problem with the [automatic setup](#1-automatic-setup), below there are instructions on how to manually configure the environment to run TEDD on the test suite subjects.
 
-  1. Java JDK 1.8 (https://www.oracle.com/technetwork/java/javase/downloads/jdk8-downloads-2133151.html)
-  2. Maven 3.5.4 (https://maven.apache.org/download.cgi)
-  3. Chrome browser (https://www.google.com/intl/it_ALL/chrome/)
-  4. Firefox browser (https://www.mozilla.org/it/firefox/new/)
-  5. Docker CE (https://docs.docker.com/install/)
-  6. Wordnet (http://wordnetcode.princeton.edu/3.0/WordNet-3.0.tar.gz). Uncompress the folder and move it (`WordNet-3.0`) in `Desktop`.
+##### 1.1.1 TEDD and the test suite subjects have the following dependencies:
 
-  TEDD has been tested in MacOS Mojave 10.14.3 and Ubuntu (18.04 LTS and 16.04 LTS).
+1. Java JDK 1.8 (https://www.oracle.com/technetwork/java/javase/downloads/jdk8-downloads-2133151.html)
+2. Maven 3.5.4 (https://maven.apache.org/download.cgi)
+3. Chrome browser (https://www.google.com/intl/it_ALL/chrome/)
+4. Firefox browser (https://www.mozilla.org/it/firefox/new/)
+5. Docker CE (https://docs.docker.com/install/)
+6. Wordnet (http://wordnetcode.princeton.edu/3.0/WordNet-3.0.tar.gz). Uncompress the folder and move it (`WordNet-3.0`) in `Desktop`.
 
-  ### 1.1.2 Clone repo and donwload docker images
-  Before running the experiments: 
-  - clone the repository (`git clone https://github.com/anonymous-fse19-submitter/FSE19-submission-material.git`) in `<path-to-your-home>/workspace` (create the folder `workspace` if it does not exist)
-  - `cd FSE19-submission-material/tedd && mvn clean compile`
-  - `cd FSE19-submission-material/testsuite-<application_name> && mvn clean compile` where `<application_name>` is `claroline|addressbook|ppma|collabtive|mrbs|mantisbt`
-  - download docker web application images. The instructions to run each web application are in the relative folders (`FSE19-submission-material/testsuite-<application_name>`):
-    - `docker pull dockercontainervm/claroline:1.11.10`
-    - `docker pull dockercontainervm/addressbook:8.0.0.0`
-    - `docker pull dockercontainervm/ppma:0.6.0`
-    - `docker pull dockercontainervm/collabtive:3.1`
-    - `docker pull dockercontainervm/mrbs:1.4.9`
-    - `docker pull dockercontainervm/mantisbt:1.2.0`
+TEDD has been tested in MacOS Mojave 10.14.3 and Ubuntu (18.04 LTS and 16.04 LTS).
 
-  ### 1.1.3 Setup app.properties
+##### 1.1.2 Clone repo and donwload docker images
+Before running the experiments: 
+- clone the repository (`git clone https://github.com/anonymous-fse19-submitter/FSE19-submission-material.git`) in `<path-to-your-home>/workspace` (create the folder `workspace` if it does not exist)
+- `cd FSE19-submission-material/tedd && mvn clean compile`
+- `cd FSE19-submission-material/testsuite-<application_name> && mvn clean compile` where `<application_name>` is `claroline|addressbook|ppma|collabtive|mrbs|mantisbt`
+- download docker web application images. The instructions to run each web application are in the relative folders (`FSE19-submission-material/testsuite-<application_name>`):
+  - `docker pull dockercontainervm/claroline:1.11.10`
+  - `docker pull dockercontainervm/addressbook:8.0.0.0`
+  - `docker pull dockercontainervm/ppma:0.6.0`
+  - `docker pull dockercontainervm/collabtive:3.1`
+  - `docker pull dockercontainervm/mrbs:1.4.9`
+  - `docker pull dockercontainervm/mantisbt:1.2.0`
 
-  Rename the `app.example.properties` in `app.properties` in folder `FSE19-submission-material/tedd/src/main/resources`. Replace all occurences of `/home/anonymous` with `<path-to-your-home>` directory.
+##### 1.1.3 Setup app.properties
+
+Rename the `app.example.properties` in `app.properties` in folder `FSE19-submission-material/tedd/src/main/resources`. Replace all occurences of `/home/anonymous` with `<path-to-your-home>` directory.
   
 
 ## 2. Run the experiments (validation - after the setup)
@@ -64,14 +64,14 @@ The third argument is the `mode`, or the desired configuration of the tool. The 
 -`baseline_complete|string_analysis|nlp_verb_only_baseline|nlp_verb_only_string|nlp_dobj_baseline|nlp_dobj_string|nlp_noun_matching_baseline|nlp_noun_matching_string`.
 
 The possible combinations of those arguments are listed below (as example `application_name=ppma`):
-1. `cd FSE19-submission-material/tedd ./run-experiment.sh claroline baseline_complete baseline_complete` to run the baseline (original order graph extraction)
-2. `cd ~/workspace/FSE19-submission-material/tedd ./run-experiment.sh ppma tedd string_analysis`
-3. `cd ~/workspace/FSE19-submission-material/tedd ./run-experiment.sh ppma tedd nlp_verb_only_baseline`
-4. `cd ~/workspace/FSE19-submission-material/tedd ./run-experiment.sh ppma tedd nlp_verb_only_string`
-5. `cd ~/workspace/FSE19-submission-material/tedd ./run-experiment.sh ppma tedd nlp_dobj_baseline`
-6. `cd ~/workspace/FSE19-submission-material/tedd ./run-experiment.sh ppma tedd nlp_dobj_string`
-7. `cd ~/workspace/FSE19-submission-material/tedd ./run-experiment.sh ppma tedd nlp_noun_matching_baseline`
-8. `cd ~/workspace/FSE19-submission-material/tedd ./run-experiment.sh ppma tedd nlp_noun_matching_string`
+1. `cd ~/workspace/FSE19-submission-material/tedd && ./run-experiment.sh claroline baseline_complete baseline_complete` to run the baseline (original order graph extraction)
+2. `cd ~/workspace/FSE19-submission-material/tedd && ./run-experiment.sh ppma tedd string_analysis`
+3. `cd ~/workspace/FSE19-submission-material/tedd && ./run-experiment.sh ppma tedd nlp_verb_only_baseline`
+4. `cd ~/workspace/FSE19-submission-material/tedd && ./run-experiment.sh ppma tedd nlp_verb_only_string`
+5. `cd ~/workspace/FSE19-submission-material/tedd && ./run-experiment.sh ppma tedd nlp_dobj_baseline`
+6. `cd ~/workspace/FSE19-submission-material/tedd && ./run-experiment.sh ppma tedd nlp_dobj_string`
+7. `cd ~/workspace/FSE19-submission-material/tedd && ./run-experiment.sh ppma tedd nlp_noun_matching_baseline`
+8. `cd ~/workspace/FSE19-submission-material/tedd && ./run-experiment.sh ppma tedd nlp_noun_matching_string`
 
 The `FSE19-submission-material/tedd/run-experiment.sh` starts the docker container for the given application and removes it when the validation ends. When the validation ends, the script saves a directory on the `Desktop` folder with the application name containing the results of the validation. The results folder contains the logs, the final dependency graph and a folder containing the intermediate graphs obtained during the validation.
 
@@ -84,6 +84,6 @@ The repository has a directory called `FSE19-submission-material/ready-to-run-pa
 
 The script `FSE19-submission-material/tedd/run-parallelization` extracts and execute all the possible test suites from each dependency graph in the `FSE19-submission-material/ready-to-run-parallelization` folder for each application.
 
-To run it type `cd ~/workspace/FSE19-submission-material/tedd && ./run-parallelization.sh <application_name>`. The script starts the docker container for the given application and stops it when the computation finishes. The unique test suites for each dependency graph are executed sequentially and the speed-up factors are computed (worst case and average case) by executing the test suite in its original order after the sequential executions.
+To run it type `cd ~/workspace/FSE19-submission-material/tedd && ./run-parallelization.sh ppma` (choosing `application_name=ppma`). The script starts the docker container for the given application and stops it when the computation finishes. The unique test suites for each dependency graph are executed sequentially and the speed-up factors are computed (worst case and average case) by executing the test suite in its original order after the sequential executions.
 
 As in the previous script the results are saved in the `Desktop` folder. The script creates a folder with the application name that contains the results directory with the logs. The logs can be inspected to see the details of the computation.

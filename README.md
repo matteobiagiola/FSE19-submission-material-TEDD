@@ -9,7 +9,7 @@ The virtual machine was created with VMWare Fusion and was exported in the `.ova
 - VirtualBox: https://www.techjunkie.com/ova-virtualbox/
 - VMWare Fusion: https://pubs.vmware.com/fusion-5/index.jsp?topic=%2Fcom.vmware.fusion.help.doc%2FGUID-275EF202-CF74-43BF-A9E9-351488E16030.html
 
-The minimum requirement to run the experiments inside the virtual machine is `4GB` of RAM.
+The minimum amount of RAM to assign to the virtual machine is `4GB`.
 
 Login credentials:
 - username: `anonymous`

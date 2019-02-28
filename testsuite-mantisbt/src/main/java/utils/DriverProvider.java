@@ -21,7 +21,7 @@ public class DriverProvider {
     public WebDriver getDriver(){
         ChromeOptions chromeOptions = new ChromeOptions();
         if(Boolean.valueOf(Properties.getInstance().getProperty("headless_browser"))){
-            chromeOptions.addArguments("--headless", "--disable-gpu", "--window-size=1200x600");
+            chromeOptions.addArguments("--no-sandbox", "--headless", "--disable-gpu", "--window-size=1200x600");
         }
         return new ChromeDriver(chromeOptions);
     }

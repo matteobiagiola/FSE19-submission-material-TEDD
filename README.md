@@ -15,11 +15,11 @@ Login credentials:
 - username: `anonymous`
 - password: `fse19`
 
-  ## 1.1 Manual Setup
+If the automatic setup worked you can skip to [the validation experiments section](#2-run-the-experiments-validation---after-the-setup).
 
-  If the automatic setup worked you can start the experiments skip to [the validation experiments section](#run-the-experiments-validation---after-the-setup).
+  ## 1.1 Manual Setup
   
-  In case there is any problem with the [automatic setup](#automatic-setup), below there are instructions on how to manually configure the environment to run TEDD on the test suite subjects.
+  In case there is any problem with the [automatic setup](#1-automatic-setup), below there are instructions on how to manually configure the environment to run TEDD on the test suite subjects.
 
   ### 1.1.1 TEDD and the test suite subjects have the following dependencies:
 
@@ -73,11 +73,10 @@ The possible combinations of those arguments are listed below (as example `appli
 7. `cd ~/workspace/FSE19-submission-material/tedd ./run-experiment.sh ppma tedd nlp_noun_matching_baseline`
 8. `cd ~/workspace/FSE19-submission-material/tedd ./run-experiment.sh ppma tedd nlp_noun_matching_string`
 
-The `FSE19-submission-material/tedd/run-experiment.sh` starts the docker container for the given application and removes it when the validation ends.
+The `FSE19-submission-material/tedd/run-experiment.sh` starts the docker container for the given application and removes it when the validation ends. When the validation ends, the script saves a directory on the `Desktop` folder with the application name containing the results of the validation. The results folder contains the logs, the final dependency graph and a folder containing the intermediate graphs obtained during the validation.
 
-It is possible to stop the computation by typing `^C` once on the terminal. Typing `^C` once will end the validation and the script takes care of saving the results computed so far and it removes the docker container for the given application. If you press `^C` twice the results are not saved and the docker container is not removed. In order to remove it, first you need to stop it `docker stop $(docker ps -aq)` and then remove it `docker rm $(docker ps -aq)` (specifically, the previous commands will not stop and remove only one container but all containers running on the system).
+It is possible to stop the computation by typing `^C` once on the terminal. Typing `^C` once will end the validation and the script takes care of saving the results computed so far and it removes the docker container for the given application (no final dependency graph is saved). If you press `^C` twice the results are not saved and the docker container is not removed. In order to remove it, first you need to stop it `docker stop $(docker ps -aq)` and then remove it `docker rm $(docker ps -aq)` (specifically, the previous commands will not stop and remove only one container but all containers running on the system).
 
-When the validation ends, the script saves a directory on the `Desktop` folder with the application name containing the results of the validation. The results folder contains the logs, the final dependency graph (only if the computation was not stopped with `^C`) and the intermediate graphs obtained during the validation.
 
 ## 3. Run the experiments (parallelization - after the setup)
 

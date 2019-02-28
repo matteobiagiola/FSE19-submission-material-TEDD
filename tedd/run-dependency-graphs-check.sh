@@ -33,6 +33,18 @@ function checkMode(){
 	fi
 }
 
+function checkConfiguration(){
+	local mode=$1
+	if [[  $mode != "string_analysis" \
+	    && $mode != "baseline_complete" \
+	    && $mode != "nlp_verb_only_baseline" && $mode != "nlp_verb_only_string" \
+	    && $mode != "nlp_dobj_baseline" && $mode != "nlp_dobj_string" \
+	    && $mode != "nlp_noun_matching_baseline" && $mode != "nlp_noun_matching_string" ]]; then
+		echo Unknown mode: $mode
+		exit 1
+	fi
+}
+
 logs_name=
 errors_logs_name=
 
@@ -46,11 +58,16 @@ function runExp(){
 
 # -----------------------------------------------------------------------------------------------------------------
 
-if test $# -lt 3 ; then echo 'ARGS: results_folder application_name mode' ; exit 1 ; fi
+if test $# -lt 3 ; then echo 'ARGS: results_folder application_name mode configuration' ; exit 1 ; fi
 
 results_folder=$1
 application_name=$2
 mode=$3
+configuration=$4
+
+if [[ -n $configuration ]]; then
+    checkConfiguration $configuration
+fi
 
 os=$(uname)
 
@@ -65,82 +82,95 @@ final_graph_recover_missed_suffix=-recover-missed-
 
 folder="$results_folder/$application_name"
 
+run_exp="true"
+
 for exp in $(ls $folder) ; do
-    echo "Checking $exp for application $application_name in mode $mode"
-    echo
-    final_graph_exp=$(find $folder/$exp -name "$final_graph_prefix*.txt")
-    list_length=$(wc -w <<< "$final_graph_exp")
-    final_graph_chosen=
-    if [[ $list_length -eq 1 ]] ; then
-        # it is baseline graph
-        final_graph_chosen=$final_graph_exp
-    elif [[ $list_length -eq 2 ]] ; then
-        # it is any other method that filters graph
-        final_graph_recover_missed=none
-        for final_graph in $final_graph_exp ; do
-            if [[ $final_graph == *$final_graph_recover_missed_suffix* ]]; then
-                final_graph_recover_missed=$final_graph
-            fi
-        done
-        if [[ $final_graph_recover_missed == none ]]; then
-            echo Final graph recover missed with this suffix $final_graph_recover_missed_suffix not found \
-                in $exp folder. List of the graphs found: $final_graph_exp
-            exit 1
-        fi
-        echo Recover missed final graph: $final_graph_recover_missed
-        final_graph_chosen=$final_graph_recover_missed
 
-    else
-        echo Folder $exp contains more than two final graphs with this prefix $final_graph_prefix
-        exit 1
-    fi
-
-    start_container=
-    main_class=
-    collect_stats=false
-
-    if [[ $mode == "parallelization" ]]; then
-
-        if [[ $os == "Darwin" ]]; then
-            sed -i "" "s%final_graph_path=.*$%final_graph_path=$final_graph_chosen%g" $properties_file
-            sed -i "" "s%check_final_graph=.*$%check_final_graph=true%g" $properties_file
-            sed -i "" "s%execute_whole_test_suite=.*$%execute_whole_test_suite=true%g" $properties_file
+    if [[ -n $configuration ]]; then
+        if [[  $exp == $configuration ]]; then
+            run_exp="true"
         else
-            sed -i "s%final_graph_path=.*$%final_graph_path=$final_graph_chosen%g" $properties_file
-            sed -i "s%check_final_graph=.*$%check_final_graph=true%g" $properties_file
-            sed -i "s%execute_whole_test_suite=.*$%execute_whole_test_suite=true%g" $properties_file
+            run_exp="false"
         fi
-
-        start_container=true
-        main_class=check_final_graph_correctness
-        collect_stats=true
-    else
-        echo Unknown mode: $mode
-        exit 1
     fi
 
-    logs_name=$HOME/Desktop/logs"_"$exp"_"$main_class"_"$application_name.txt
-    errors_logs_name=$HOME/Desktop/errors"_"$exp"_"$main_class"_"$application_name.txt
-    runExp $application_name $main_class $start_container $collect_stats
+    if [[ $run_exp == "true" ]]; then
+        echo "Checking $exp for application $application_name in mode $mode"
+        echo
+        final_graph_exp=$(find $folder/$exp -name "$final_graph_prefix*.txt")
+        list_length=$(wc -w <<< "$final_graph_exp")
+        final_graph_chosen=
+        if [[ $list_length -eq 1 ]] ; then
+            # it is baseline graph
+            final_graph_chosen=$final_graph_exp
+        elif [[ $list_length -eq 2 ]] ; then
+            # it is any other method that filters graph
+            final_graph_recover_missed=none
+            for final_graph in $final_graph_exp ; do
+                if [[ $final_graph == *$final_graph_recover_missed_suffix* ]]; then
+                    final_graph_recover_missed=$final_graph
+                fi
+            done
+            if [[ $final_graph_recover_missed == none ]]; then
+                echo Final graph recover missed with this suffix $final_graph_recover_missed_suffix not found \
+                    in $exp folder. List of the graphs found: $final_graph_exp
+                exit 1
+            fi
+            echo Recover missed final graph: $final_graph_recover_missed
+            final_graph_chosen=$final_graph_recover_missed
 
-    if [[ $collect_stats == "false" ]]; then
-        index_of_last_slash=$(echo $final_graph_chosen | awk -F"/" '{print length($0)-length($NF)}')
-
-        if [[ $index_of_last_slash < 0 ]] ; then
-            echo Cannot find slashes in $final_graph_chosen path
+        else
+            echo Folder $exp contains more than two final graphs with this prefix $final_graph_prefix
             exit 1
         fi
 
-        # Take all the characters from 1 to $index with that cut syntax
-        target_folder_for_logs=$(echo $final_graph_chosen | cut -c1-$index_of_last_slash)
+        start_container=
+        main_class=
+        collect_stats=false
 
-        checkFolderExistence $target_folder_for_logs
+        if [[ $mode == "parallelization" ]]; then
 
-        echo Moving $logs_name in $target_folder_for_logs
-        mv $logs_name $target_folder_for_logs
-        echo Moving $errors_logs_name in $target_folder_for_logs
-        mv $errors_logs_name $target_folder_for_logs
-        echo
+            if [[ $os == "Darwin" ]]; then
+                sed -i "" "s%final_graph_path=.*$%final_graph_path=$final_graph_chosen%g" $properties_file
+                sed -i "" "s%check_final_graph=.*$%check_final_graph=true%g" $properties_file
+                sed -i "" "s%execute_whole_test_suite=.*$%execute_whole_test_suite=true%g" $properties_file
+            else
+                sed -i "s%final_graph_path=.*$%final_graph_path=$final_graph_chosen%g" $properties_file
+                sed -i "s%check_final_graph=.*$%check_final_graph=true%g" $properties_file
+                sed -i "s%execute_whole_test_suite=.*$%execute_whole_test_suite=true%g" $properties_file
+            fi
+
+            start_container=true
+            main_class=check_final_graph_correctness
+            collect_stats=true
+        else
+            echo Unknown mode: $mode
+            exit 1
+        fi
+
+        logs_name=$HOME/Desktop/logs"_"$exp"_"$main_class"_"$application_name.txt
+        errors_logs_name=$HOME/Desktop/errors"_"$exp"_"$main_class"_"$application_name.txt
+        runExp $application_name $main_class $start_container $collect_stats
+
+        if [[ $collect_stats == "false" ]]; then
+            index_of_last_slash=$(echo $final_graph_chosen | awk -F"/" '{print length($0)-length($NF)}')
+
+            if [[ $index_of_last_slash < 0 ]] ; then
+                echo Cannot find slashes in $final_graph_chosen path
+                exit 1
+            fi
+
+            # Take all the characters from 1 to $index with that cut syntax
+            target_folder_for_logs=$(echo $final_graph_chosen | cut -c1-$index_of_last_slash)
+
+            checkFolderExistence $target_folder_for_logs
+
+            echo Moving $logs_name in $target_folder_for_logs
+            mv $logs_name $target_folder_for_logs
+            echo Moving $errors_logs_name in $target_folder_for_logs
+            mv $errors_logs_name $target_folder_for_logs
+            echo
+        fi
     fi
 
 done

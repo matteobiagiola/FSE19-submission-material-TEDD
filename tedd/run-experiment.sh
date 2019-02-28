@@ -32,13 +32,13 @@ function runExp(){
 }
 
 function checkMode(){
-	local mode=$1
-	if [[  $mode != "string_analysis" \
-	    && $mode != "baseline_complete" \
-	    && $mode != "nlp_verb_only_baseline" && $mode != "nlp_verb_only_string" \
-	    && $mode != "nlp_dobj_baseline" && $mode != "nlp_dobj_string" \
-	    && $mode != "nlp_noun_matching_baseline" && $mode != "nlp_noun_matching_string" ]]; then
-		echo Unknown mode: $mode
+	local configuration=$1
+	if [[  $configuration != "string_analysis" \
+	    && $configuration != "baseline_complete" \
+	    && $configuration != "nlp_verb_only_baseline" && $configuration != "nlp_verb_only_string" \
+	    && $configuration != "nlp_dobj_baseline" && $configuration != "nlp_dobj_string" \
+	    && $configuration != "nlp_noun_matching_baseline" && $configuration != "nlp_noun_matching_string" ]]; then
+		echo Unknown configuration: $configuration
 		exit 1
 	fi
 }

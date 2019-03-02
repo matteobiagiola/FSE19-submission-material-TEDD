@@ -1,7 +1,7 @@
 # FSE19 replication package
 This repository contains the tool implementing the approach described in an ESEC/FSE19 submission, together with the subjects used in the evaluation. 
 
-It is also provided a pdf file with (supplementary material)[https://github.com/anonymous-fse19-submitter/FSE19-submission-material/blob/master/supplementary-material.pdf]. All the results concerning the three research questions we studied in the paper are reported in the pdf file as tables or charts.
+It is also provided a pdf file with [supplementary material](https://github.com/anonymous-fse19-submitter/FSE19-submission-material/blob/master/supplementary-material.pdf). All the results concerning the three research questions we studied in the paper are reported in the pdf file as tables or charts.
 
 ## 1. Automatic Setup
 

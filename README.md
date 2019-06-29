@@ -42,12 +42,12 @@ Before running the experiments (assuming that `~` indicates the path the home di
 - `cd ~/workpsace/FSE19-submission-material/testsuite-<application_name> && mvn clean compile` where `<application_name>` is: 
   - `claroline|addressbook|ppma|collabtive|mrbs|mantisbt`
 - download docker web application images. The instructions to run each web application are in the relative folders (`FSE19-submission-material/testsuite-<application_name>`):
-  - `docker pull dockercontainervm/claroline:1.11.10` ([README](https://github.com/anonymous-fse19-submitter/FSE19-submission-material/blob/master/testsuite-claroline/README.md))
-  - `docker pull dockercontainervm/addressbook:8.0.0.0` ([README](https://github.com/anonymous-fse19-submitter/FSE19-submission-material/blob/master/testsuite-addressbook/README.md))
-  - `docker pull dockercontainervm/ppma:0.6.0` ([README](https://github.com/anonymous-fse19-submitter/FSE19-submission-material/blob/master/testsuite-ppma/README.md))
-  - `docker pull dockercontainervm/collabtive:3.1` ([README](https://github.com/anonymous-fse19-submitter/FSE19-submission-material/blob/master/testsuite-collabtive/README.md))
-  - `docker pull dockercontainervm/mrbs:1.4.9` ([README](https://github.com/anonymous-fse19-submitter/FSE19-submission-material/blob/master/testsuite-mrbs/README.md))
-  - `docker pull dockercontainervm/mantisbt:1.2.0` ([README](https://github.com/anonymous-fse19-submitter/FSE19-submission-material/blob/master/testsuite-mantisbt/README.md))
+  - `docker pull dockercontainervm/claroline:1.11.10` ([README](https://github.com/matteobiagiola/FSE19-submission-material-TEDD/blob/master/testsuite-claroline/README.md))
+  - `docker pull dockercontainervm/addressbook:8.0.0.0` ([README]https://github.com/matteobiagiola/FSE19-submission-material-TEDD/blob/master/testsuite-addressbook/README.md))
+  - `docker pull dockercontainervm/ppma:0.6.0` ([README](https://github.com/matteobiagiola/FSE19-submission-material-TEDD/blob/master/testsuite-ppma/README.md))
+  - `docker pull dockercontainervm/collabtive:3.1` ([README](https://github.com/matteobiagiola/FSE19-submission-material-TEDD/blob/master/testsuite-collabtive/README.md))
+  - `docker pull dockercontainervm/mrbs:1.4.9` ([README](https://github.com/matteobiagiola/FSE19-submission-material-TEDD/blob/master/testsuite-mrbs/README.md))
+  - `docker pull dockercontainervm/mantisbt:1.2.0` ([README](https://github.com/matteobiagiola/FSE19-submission-material-TEDD/blob/master/testsuite-mantisbt/README.md))
 
 ##### 1.1.3 Setup app.properties
 

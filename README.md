@@ -43,7 +43,7 @@ Before running the experiments (assuming that `~` indicates the path the home di
   - `claroline|addressbook|ppma|collabtive|mrbs|mantisbt`
 - download docker web application images. The instructions to run each web application are in the relative folders (`FSE19-submission-material/testsuite-<application_name>`):
   - `docker pull dockercontainervm/claroline:1.11.10` ([README](https://github.com/matteobiagiola/FSE19-submission-material-TEDD/blob/master/testsuite-claroline/README.md))
-  - `docker pull dockercontainervm/addressbook:8.0.0.0` ([README]https://github.com/matteobiagiola/FSE19-submission-material-TEDD/blob/master/testsuite-addressbook/README.md))
+  - `docker pull dockercontainervm/addressbook:8.0.0.0` ([README](https://github.com/matteobiagiola/FSE19-submission-material-TEDD/blob/master/testsuite-addressbook/README.md))
   - `docker pull dockercontainervm/ppma:0.6.0` ([README](https://github.com/matteobiagiola/FSE19-submission-material-TEDD/blob/master/testsuite-ppma/README.md))
   - `docker pull dockercontainervm/collabtive:3.1` ([README](https://github.com/matteobiagiola/FSE19-submission-material-TEDD/blob/master/testsuite-collabtive/README.md))
   - `docker pull dockercontainervm/mrbs:1.4.9` ([README](https://github.com/matteobiagiola/FSE19-submission-material-TEDD/blob/master/testsuite-mrbs/README.md))

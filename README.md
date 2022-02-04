@@ -5,7 +5,7 @@ It is also provided a pdf file with [supplementary material](https://github.com/
 
 ## 1. Automatic Setup
 
-A virtual machine running Ubuntu server 16.04 is available for download at https://drive.google.com/file/d/1O94guDkO5EQLtK-jVMH6r_mJpdbc3OEt/view?usp=sharing. The virtual machine contains this repository and all the dependencies needed to run TEDD on the test suite subjects. 
+A virtual machine running Ubuntu server 16.04 is available for download [here](https://drive.switch.ch/index.php/s/EAPpzl7vryfuFm6/download). The virtual machine contains this repository and all the dependencies needed to run TEDD on the test suite subjects. 
 
 The virtual machine was created with VMWare Fusion and was exported in the `.ova` format, a platform-independent distribution format for virtual machines. It can be imported by any virtualization software although it was tested only on VirtualBox and VMWare Fusion. Instructions on how to import an `.ova` format virtual machine in VirtualBox and VMWare Fusion are listed below:
 

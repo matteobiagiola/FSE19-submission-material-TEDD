@@ -13,14 +13,14 @@ public class DriverProvider {
     private static DriverProvider ourInstance = new DriverProvider();
 
     private DriverProvider(){
-        WebDriverManager.chromedriver().setup();
+        WebDriverManager.chromedriver().clearDriverCache().setup();
         System.setProperty("webdriver.chrome.silentOutput", "true");
         Logger.getLogger("org.openqa.selenium.remote").setLevel(Level.OFF);
     }
 
     public WebDriver getDriver(){
         ChromeOptions chromeOptions = new ChromeOptions();
-        if(Boolean.valueOf(Properties.getInstance().getProperty("headless_browser"))){
+        if(Boolean.parseBoolean(Properties.getInstance().getProperty("headless_browser"))){
             chromeOptions.addArguments("--no-sandbox", "--headless", "--disable-gpu", "--window-size=1200x600");
         }
         return new ChromeDriver(chromeOptions);

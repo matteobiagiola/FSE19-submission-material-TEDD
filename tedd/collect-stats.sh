@@ -17,3 +17,13 @@ mv ~/Desktop/$application_name/results/$current_date-$main_class/graphs/dependen
     ~/Desktop/$application_name/results/$current_date-$main_class
 
 mv ~/Desktop/*$main_class_$application_name.txt ~/Desktop/$application_name/results/$current_date-$main_class
+
+# if graphviz is installed, plot the intermediate graphs
+if [[ $(which dot) != *"not found" ]]; then 
+    current_dir=$(PWD)
+    cd ~/Desktop/$application_name/results/$current_date-$main_class/graphs
+    for graph_name_txt in $(ls); do 
+        graph_name=$(echo $graph_name_txt | cut -d'.' -f 1); dot -Tpng $graph_name_txt > $graph_name.png
+    done
+    cd $current_dir
+fi
